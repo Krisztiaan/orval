@@ -62,8 +62,11 @@ export const getRefInfo = async (
     ? url.resolve(context.specKey, pathname)
     : resolve(getFileInfo(context.specKey).dirname, pathname);
 
+  const name = pascal(refSplitted[1])
+  const suffix = RefComponentSuffix[refComponent]
+
   return {
-    name: pascal(refSplitted[1]) + RefComponentSuffix[refComponent],
+    name: name.endsWith(suffix) ? name : name + suffix,
     originalName: refSplitted[1],
     specKey: path,
     type: refComponent,
